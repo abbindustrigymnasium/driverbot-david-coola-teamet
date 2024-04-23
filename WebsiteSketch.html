@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DRIVERBOT</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            font-size: 20px;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        .joystick-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .joystick {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: #3a3a3a;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .handle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #F08080;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-size: 2.5em;">DRIVERBOT</h1>
+    <div class="joystick-container">
+        <div id="moveJoystick" class="joystick">
+            <div id="moveHandle" class="handle"></div>
+        </div>
+        <div id="rotateJoystick" class="joystick">
+            <div id="rotateHandle" class="handle"></div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to make the handles draggable within the joysticks
+        document.addEventListener('DOMContentLoaded', function() {
+            makeDraggable('moveHandle', 'moveJoystick');
+            makeDraggable('rotateHandle', 'rotateJoystick');
+        });
+
+        function makeDraggable(handleId, joystickId) {
+            var handle = document.getElementById(handleId);
+            var joystick = document.getElementById(joystickId);
+            var joystickRect = joystick.getBoundingClientRect();
+
+            handle.addEventListener('mousedown', startDragging);
+            handle.addEventListener('touchstart', startDragging);
+
+            function startDragging(event) {
+                event.preventDefault(); // Prevent default drag behavior
+
+                document.addEventListener('mousemove', dragHandle);
+                document.addEventListener('mouseup', stopDragging);
+                document.addEventListener('touchmove', dragHandle);
+                document.addEventListener('touchend', stopDragging);
+            }
+
+            function dragHandle(event) {
+                var x = event.clientX || event.touches[0].clientX;
+                var y = event.clientY || event.touches[0].clientY;
+
+                var offsetX = x - joystickRect.left;
+                var offsetY = y - joystickRect.top;
+
+                var distance = Math.sqrt(Math.pow(offsetX - joystickRect.width / 2, 2) + Math.pow(offsetY - joystickRect.height / 2, 2));
+
+                if (distance <= joystickRect.width / 2) {
+                    handle.style.left = offsetX - handle.offsetWidth / 2 + 'px';
+                    handle.style.top = offsetY - handle.offsetHeight / 2 + 'px';
+                } else {
+                    var angle = Math.atan2(offsetY - joystickRect.height / 2, offsetX - joystickRect.width / 2);
+                    var newX = joystickRect.width / 2 + Math.cos(angle) * (joystickRect.width / 2 - handle.offsetWidth / 2);
+                    var newY = joystickRect.height / 2 + Math.sin(angle) * (joystickRect.height / 2 - handle.offsetHeight / 2);
+
+                    handle.style.left = newX + 'px';
+                    handle.style.top = newY + 'px';
+                }
+            }
+
+            function stopDragging() {
+                document.removeEventListener('mousemove', dragHandle);
+                document.removeEventListener('mouseup', stopDragging);
+                document.removeEventListener('touchmove', dragHandle);
+                document.removeEventListener('touchend', stopDragging);
+            }
+        }
+    </script>
+</body>
+</html>
