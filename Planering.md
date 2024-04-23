@@ -1,5 +1,6 @@
 ![New Project(21)](https://github.com/abbindustrigymnasium/driverbot-david-coola-teamet/assets/110134664/0fe113fc-cbc4-4f04-b2f2-12c4a163622b)
 ![New Project(22)](https://github.com/abbindustrigymnasium/driverbot-david-coola-teamet/assets/110134664/eeb26018-4bb7-469f-9518-ba52829b64e8)
+![New Project(1)(1)](https://github.com/abbindustrigymnasium/driverbot-david-coola-teamet/assets/110134664/8c92283b-a4c4-4fed-be80-5279af22f125)
 
 # Min driver bot mål(Software):
 
@@ -22,9 +23,35 @@
 4. I autonomi fliken lägg till data som "Time online" och "Objects detected"
 5. lägg till hamburger menu(se bild) för att ge flera menyer som t.ex data.
 
-# Min driver bot mål(Hardware):
 
 # Tidsplan:
-!glöm inte tidsbuffert
+**Tisdag 23/4:** Börja på HTML kod för att göra om psd sketchen till en väldigt enkel hemsida.
 
-     
+**Onsdag 24/4:** Tidsbuffert för att göra klart Html
+
+**Fredag 26/4:** Research och implementering av initialisering av MQTT
+
+**Måndag 29/4:** Tidsbuffert ifall jag har problem med att skapa en connection med broker
+
+**Tisdag 30/4:** Mål att börja skicka packets från hemsida till mqtt broker
+
+**Måndag 6/5:** Mål att skicka packets från mqtt broker till esp8266 och läsa rörelse datan
+
+**Tisdag 7/5:** Använd rörelse datan från mqtt broker för att driva motorerna och om det behövs minska delay mellan input på websidan och output till motorn.
+
+**Måndag 13/5 och Tisdag 14/5:** Tidsbuffert eftersom att det kan finnas problem med packets och mqtt. Kan också användas för att bygga klart bilen
+
+**Måndag 20/5:** Göra hemsidan mer komplett och börja research på path finding för driver bot
+
+**Måndag 21/5:** Implementera path finding lokalt på driverbot 
+
+**Torsdag 23/5:** Lägg till funktion på autonomous sidan på websidan så att start knappen aktiverar path finding
+
+**Måndag 27/5 och Tisdag 28/5** Tidsbuffert för att göra hemsidan mer komplett och för att försäkra att allt funkar
+
+**Fredag 31/5** Uppkörning 😱
+
+
+
+
+    
