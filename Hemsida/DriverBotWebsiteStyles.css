@@ -1,13 +1,12 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
     text-align: center;
     font-size: 20px;
-    background-color: #1a1a1a;
+    background: linear-gradient(135deg, #260161, #232323fb); /* Gradient background */
     color: #fff;
     margin: 0;
     padding: 0;
 }
-
 #manualMenu {
     display: flex;
     justify-content: space-between;
@@ -47,7 +46,7 @@ body {
     position: relative;
     width: 200px;
     height: 50px;
-    background: #3a3a3a;
+    background: linear-gradient(45deg, #212226, #161616); /* Gradient background */
     border-radius: 25px;
     margin: 20px auto;
     cursor: pointer;
@@ -91,7 +90,6 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 #startButton:hover {
@@ -107,7 +105,7 @@ body {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #4CAF50;
+    background: linear-gradient(45deg, #5cb55f, #409a43); /* Gradient background */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -126,15 +124,22 @@ body {
 }
 
 .key {
-    background-color: #353943;
+    background: linear-gradient(45deg, #1f2125, #1a1a1a); /* Gradient background */
     border: 1px solid #8d8d8d;
-    color: #ffffff;
+    color: #fff;
     width: 100px;
     height: 100px;
     border-radius: 10px;
     margin: 15px;
-    vertical-align: middle; /* Add this line */
-    text-align:center;
+    text-align: center;
+    /*transition: all 0.2s ease;*/
+}
+
+.activeKey {
+    background: linear-gradient(45deg, #ff3232, #ff0000); /* Gradient background */
+    border: 1px solid #8d8d8d;
+    color: #fff;
+    /*transition: all 0.2s ease;*/
 }
 
 .top-row {

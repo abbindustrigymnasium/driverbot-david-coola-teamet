@@ -7,12 +7,46 @@ var Connected = false;
 var clientID;
 
 document.getElementById('connectButton').addEventListener('click', startConnect);
+
+const keyTimers = {}; // Object to store individual timers for keys
+
 document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 37) {
-        alert('Left was pressed');
-    }
-    else if(event.keyCode == 39) {
-        alert('Right was pressed');
+    const keyCode = event.keyCode;
+    const key = document.querySelector(`div[data-key="${keyCode}"]`);
+
+    if (key) {
+        if(keyCode == 87)
+        {
+            //W key
+            publishMessage(topicY, "1");
+        }
+        else if(keyCode == 65)
+        {
+            //A key
+            publishMessage(topicX, "-1");
+        }
+        else if(keyCode == 83)
+        {
+            // S key
+            publishMessage(topicY, "-1");
+        }
+        else if(keyCode == 68)
+        {
+            // D key
+            publishMessage(topicX, "1");
+        }
+
+
+        key.classList.add("activeKey"); // Add the "activeKey" class to the key
+        // Clear any existing timer for this key and set a new one
+        clearTimeout(keyTimers[keyCode]);
+        keyTimers[keyCode] = setTimeout(function() {
+            console.log("Reseting the values(change this later may override other key presses");
+            publishMessage(topicY, "0");
+            publishMessage(topicX, "0");
+            key.classList.remove("activeKey"); // Remove the "activeKey" class after 500ms
+        }, 500);
+       
     }
 });
 
@@ -94,7 +128,7 @@ function init() {
     var stage = new createjs.Stage('joystick');
 
     var psp = new createjs.Shape();
-    psp.graphics.beginFill('#ffffff').drawCircle(xCenter, yCenter, 50);
+    psp.graphics.beginFill('#999999').drawCircle(xCenter, yCenter, 50);
     psp.alpha = 0.25;
 
     var vertical = new createjs.Shape();
@@ -135,6 +169,8 @@ function init() {
     mc.on("panend", function(ev) {
         psp.alpha = 0.25;
         createjs.Tween.get(psp).to({x:xCenter, y:yCenter}, 200, createjs.Ease.getPowInOut(2.5));
+        publishMessage(topicY, "0");
+        publishMessage(topicX, "0");
     });
 }
 

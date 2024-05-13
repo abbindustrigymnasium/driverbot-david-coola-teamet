@@ -1,7 +1,6 @@
 #define motorPinLeftSpeed 4  // D? !0
 #define motorPinLeftDir 0
 
-
 void setup() {
   // put your setup code here, to run once:
   pinMode(motorPinLeftSpeed, OUTPUT);
