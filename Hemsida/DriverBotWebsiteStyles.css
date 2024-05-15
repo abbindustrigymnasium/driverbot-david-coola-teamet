@@ -1,12 +1,23 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     font-size: 20px;
-    background: linear-gradient(135deg, #260161, #232323fb); /* Gradient background */
+    background: linear-gradient(135deg, #00111f, #232323fb);
     color: #fff;
     margin: 0;
     padding: 0;
+    animation: gradient 5s ease-in-out infinite;
 }
+
+@keyframes gradient {
+    0% {background: linear-gradient(135deg, #00111f, #232323fb);}
+    25% {background: linear-gradient(135deg, #00222e, #464646fb);}
+    50% {background: linear-gradient(135deg, #00333d, #696969fb);}
+    75% {background: linear-gradient(135deg, #00444c, #8c8c8cfb);}
+    100% {background: linear-gradient(135deg, #00111f, #232323fb);}
+}
+
+
 #manualMenu {
     display: flex;
     justify-content: space-between;
