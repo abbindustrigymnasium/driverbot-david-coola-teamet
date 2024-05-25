@@ -23,8 +23,8 @@ const char *topicY = "catidifat@gmail.com/Ymove";
 const char *mqtt_username = "catidifat@gmail.com";
 const char *mqtt_password = "Mybroker";
 const int mqtt_port = 1883;
-
-  void setup() {
+int MaxPower = 1024;
+void setup() {
   s1.attach(D2, 500, 2400);
   Serial.begin(9600);
   //delay so the serial monitor can keep up 🙏
@@ -83,23 +83,40 @@ void callback(char *topic, byte *payload, unsigned int length) {
 
     // Convert the string to a float
     float floatValue = atof(payloadStr);
-
-    // Map the payload value to servo angles using linear interpolation
     float angle;
-
-    // Linear interpolation between -1 and 1
-    angle = ((floatValue) + 1) * 90; // Scale the value to range from 0 to 180
-
+    float MotorPower;
     if (strcmp(topic, topicX) == 0) {
-        // Process the mapped angle value here
-        s1.write(angle); // Write the angle to the servo
+      // Map the payload value to servo angles using linear interpolation
+
+      // Linear interpolation between -1 and 1
+      angle = ((floatValue) + 1) * 90; // Scale the value to range from 0 to 180
+      // Process the mapped angle value here
+      s1.write(angle); // Write the angle to the servo
+    }
+    if (strcmp(topic, topicY) == 0) {
+      
+      // Process the mapped angle value here
+      MotorPower = floatValue * MaxPower;
+      Serial.print("Motor powaa: ");
+      Serial.println(MotorPower);
+      if (MotorPower > 0)
+      {
+        digitalWrite(motorPinLeftDir, LOW);
+      }
+      else if (MotorPower < 0)
+      {
+        digitalWrite(motorPinLeftDir, HIGH);
+      }
+      analogWrite(motorPinLeftSpeed, int(MotorPower));
+     
+       
+
     }
 }
 
 
 void loop() {
   client.loop();
-  //digitalWrite(motorPinLeftDir, HIGH);
   
 }
 

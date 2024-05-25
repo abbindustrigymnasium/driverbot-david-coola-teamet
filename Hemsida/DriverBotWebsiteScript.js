@@ -18,7 +18,7 @@ document.addEventListener('keydown', function(event) {
         if(keyCode == 87)
         {
             //W key
-            publishMessage(topicY, "1");
+            publishMessage(topicY, "1");    
         }
         else if(keyCode == 65)
         {

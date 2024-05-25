@@ -6,17 +6,17 @@ body {
     color: #fff;
     margin: 0;
     padding: 0;
-    animation: gradient 5s ease-in-out infinite;
+    animation: change-color-anim 20s linear infinite;
 }
 
-@keyframes gradient {
-    0% {background: linear-gradient(135deg, #00111f, #232323fb);}
-    25% {background: linear-gradient(135deg, #00222e, #464646fb);}
-    50% {background: linear-gradient(135deg, #00333d, #696969fb);}
-    75% {background: linear-gradient(135deg, #00444c, #8c8c8cfb);}
-    100% {background: linear-gradient(135deg, #00111f, #232323fb);}
+@keyframes change-color-anim {
+    0%, 100% {
+        background: linear-gradient(135deg, #00111f, #232323fb);
+    }
+    50% {
+        background: linear-gradient(135deg, #7fff00, #ff4500);
+    }
 }
-
 
 #manualMenu {
     display: flex;
@@ -172,4 +172,24 @@ body {
 #manualMenu.active .keyboard,
 #manualMenu.active #joystick {
     visibility: visible; /* Show keyboard and joystick when manual menu is active */
+}
+
+p {
+    padding: 10px;
+}
+
+.container {
+    width: 100%;
+    height: 250px;
+    background-color: #ff4500;
+    animation: change-color-anim 20s linear infinite;
+}
+
+@keyframes change-color-anim {
+    0%, 100% {
+        background-color: #ff4500;
+    }
+    50% {
+        background-color: #7fff00;
+    }
 }
