@@ -3,52 +3,65 @@ var host = "maqiatto.com";
 var port = "8883";
 var topicX = "catidifat@gmail.com/Xmove";
 var topicY = "catidifat@gmail.com/Ymove";
+var AutonomousTopic = "catidifat@gmail.com/AutonomousActivation";
 var Connected = false;
 var clientID;
 
 document.getElementById('connectButton').addEventListener('click', startConnect);
+document.getElementById('startButton').addEventListener('click', StartAutonomous);
 
-const keyTimers = {}; // Object to store individual timers for keys
+const activeKeys = {}; // Object to store the state of each key
 
 document.addEventListener('keydown', function(event) {
     const keyCode = event.keyCode;
     const key = document.querySelector(`div[data-key="${keyCode}"]`);
 
-    if (key) {
-        if(keyCode == 87)
-        {
-            //W key
-            publishMessage(topicY, "1");    
-        }
-        else if(keyCode == 65)
-        {
-            //A key
-            publishMessage(topicX, "-1");
-        }
-        else if(keyCode == 83)
-        {
+    if (key && !activeKeys[keyCode]) {
+        if (keyCode === 87) {
+            // W key
+            activeKeys[keyCode] = { topic: topicY, value: 1 };
+        } else if (keyCode === 65) {
+            // A key
+            activeKeys[keyCode] = { topic: topicX, value: -1 };
+        } else if (keyCode === 83) {
             // S key
-            publishMessage(topicY, "-1");
-        }
-        else if(keyCode == 68)
-        {
+            activeKeys[keyCode] = { topic: topicY, value: -1 };
+        } else if (keyCode === 68) {
             // D key
-            publishMessage(topicX, "1");
+            activeKeys[keyCode] = { topic: topicX, value: 1 };
         }
-
 
         key.classList.add("activeKey"); // Add the "activeKey" class to the key
-        // Clear any existing timer for this key and set a new one
-        clearTimeout(keyTimers[keyCode]);
-        keyTimers[keyCode] = setTimeout(function() {
-            console.log("Reseting the values(change this later may override other key presses");
-            publishMessage(topicY, "0");
-            publishMessage(topicX, "0");
-            key.classList.remove("activeKey"); // Remove the "activeKey" class after 500ms
-        }, 500);
-       
+        updateMovement();
     }
 });
+
+document.addEventListener('keyup', function(event) {
+    const keyCode = event.keyCode;
+    const key = document.querySelector(`div[data-key="${keyCode}"]`);
+
+    if (key && activeKeys[keyCode]) {
+        delete activeKeys[keyCode];
+        key.classList.remove("activeKey"); // Remove the "activeKey" class from the key
+        updateMovement();
+    }
+});
+
+function updateMovement() {
+    let xValue = 0;
+    let yValue = 0;
+
+    for (const key in activeKeys) {
+        if (activeKeys[key].topic === topicX) {
+            xValue += activeKeys[key].value;
+        } else if (activeKeys[key].topic === topicY) {
+            yValue += activeKeys[key].value;
+        }
+    }
+
+    publishMessage(topicX, xValue.toString());
+    publishMessage(topicY, yValue.toString());
+}
 
 function startConnect() {
     if (!Connected) {
@@ -77,6 +90,7 @@ function onConnect() {
     updateStatus();
     client.subscribe(topicX);
     client.subscribe(topicY);
+    client.subscribe(AutonomousTopic);
 }
 
 function onMessageArrived(message) {
@@ -121,7 +135,10 @@ document.getElementById('modeSwitch').onchange = function () {
         this.nextElementSibling.textContent = 'Manual';
     }
 };
-
+function StartAutonomous()
+{
+    publishMessage(AutonomousTopic, "Auto");
+}
 function init() {
     var xCenter = 150;
     var yCenter = 150;
@@ -186,6 +203,7 @@ function calculateCoords(angle, distance) {
 function publishMessage(topic, message) {
     if (client && client.isConnected()) {
         var mqttMessage = new Paho.MQTT.Message(message);
+        console.log("Sending a message : " + mqttMessage)
         mqttMessage.destinationName = topic;
         client.send(mqttMessage);
     }
