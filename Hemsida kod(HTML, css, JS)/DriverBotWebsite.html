@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Title for the website -->
     <title>DRIVERBOT</title>
+    <!-- Link for styles -->
     <link rel="stylesheet" type="text/css" href="DriverBotWebsiteStyles.css">
 </head>
-<body onload="init();"% >
+<body>
 <h1 style="font-size: 2.5em;">DRIVERBOT</h1>
 <!-- Status display -->
 <div id="statusText">Status: Disconnected</div>
+<!-- Rocker switch to change between the autonomous and manual control menus -->
 <div id="menuSwitcher" onclick="document.getElementById('modeSwitch').click();">
     <input type="checkbox" id="modeSwitch">
     <label for="modeSwitch">Manual</label>
 </div>
 
-<div id="messages"></div>
 <div id="manualMenu" class ="menu active">
     <canvas id="joystick" height="300" width="300"></canvas>
-
+    <!-- Keyboard Structure -->
     <div class="keyboard">
       <!-- Top Row -->
       <div class="top-row">
@@ -49,6 +51,7 @@
 
 <div id="autonomousMenu" class="menu">
     <button id="startButton">START</button>
+    <div id="timerDisplay">Time spent self driving: 0s</div>
 </div>
 
 <!-- Connect/Disconnect button -->
@@ -57,7 +60,7 @@
 <!-- Debug text display -->
 <div id="debugText"></div>
 
-<!-- CDN libraries -->
+<!-- CDN linked libraries for joystick drawing, mqtt and link for javascript-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
 <script src="https://code.createjs.com/1.0.0/easeljs.min.js" type="text/javascript"></script>
 <script src="https://code.createjs.com/1.0.0/tweenjs.min.js" type="text/javascript"></script>

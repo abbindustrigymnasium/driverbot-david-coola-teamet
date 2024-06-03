@@ -1,0 +1,216 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font family for the whole body */
+    text-align: center; /* Center text alignment */
+    font-size: 20px; /* Base font size */
+    
+    color: #fff; /* Text color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    animation: change-color-anim 20s linear infinite; /* Apply background color animation */
+    background: linear-gradient(135deg, #0e0e0e, #171717fb); /* Background gradient */
+    background-size: cover; /* Cover the entire background */
+    min-height: 100vh; /* Ensure minimum height of viewport */
+}
+
+/*Title css*/
+h1 {
+    font-size: 2.5em; /* Font size */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.164); /* Subtle Text shadow for the title */
+}
+
+/* Styling for the manual control menu */
+#manualMenu {
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Center align items */
+    height: 300px; /* Fixed height */
+}
+
+/* Styling for the joystick */
+#joystick {
+    margin-left: 300px; /* Left margin */
+    height: 300px; /* Fixed height */
+    width: 300px; /* Fixed width */
+    border-radius: 300px; /* Circular shape */
+    background-color: #000000d9; /* Semi-transparent black background */
+    cursor: pointer; /* Pointer cursor on hover */
+    user-select: none; /* Disable text selection */
+    z-index: 0; /* Layering */
+}
+
+/* Styling for the keyboard */
+.keyboard {
+    margin-right: 300px; /* Right margin */
+    margin-top: 100px; /* Top margin */
+    height: 300px; /* Fixed height */
+    width: 300px; /* Fixed width */
+}
+
+/* Disable text selection on elements with this class */
+.noselect {
+    -webkit-touch-callout: none; /* Disable callout on touch */
+    -webkit-user-select: none; /* Disable text selection in Webkit browsers */
+    -khtml-user-select: none; /* Disable text selection in Konqueror */
+    -moz-user-select: none; /* Disable text selection in Firefox */
+    -ms-user-select: none; /* Disable text selection in Internet Explorer */
+    user-select: none; /* Disable text selection */
+}
+
+/* Styling for the menu switcher */
+#menuSwitcher {
+    position: relative; /* Position relative for internal positioning */
+    width: 200px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    background: linear-gradient(45deg, #212226, #161616); /* Gradient background */
+    border-radius: 25px; /* Rounded corners */
+    margin: 20px auto; /* Center with auto margin */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Hide the default checkbox */
+#menuSwitcher input {
+    display: none; /* Hide the input element */
+}
+
+/* Styling for the switcher label */
+#menuSwitcher label {
+    position: absolute; /* Absolute position within the switcher */
+    top: 5px; /* Top offset */
+    left: 5px; /* Left offset */
+    width: 90px; /* Fixed width */
+    height: 40px; /* Fixed height */
+    background: rgb(255, 40, 40); /* Background color */
+    border-radius: 20px; /* Rounded corners */
+    transition: 0.3s; /* Smooth transition */
+    line-height: 40px; /* Center text vertically */
+    text-align: center; /* Center text horizontally */
+    font-size: 0.6em; /* Smaller font size */
+}
+
+/* Change label position when the input is checked */
+#menuSwitcher input:checked + label {
+    left: 105px; /* Move to the right */
+}
+
+/* Hide menu by default */
+.menu {
+    display: none; /* Hide the menu */
+}
+
+/* Show menu when active */
+.menu.active {
+    display: block; /* Display the menu */
+}
+
+/* Styling for the start button */
+#startButton {
+    padding: 20px; /* Padding inside the button */
+    font-size: 1.5em; /* Larger font size */
+    background-color: #222222; /* Dark background color */
+    color: #fff; /* White text color */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Change background color on hover */
+#startButton:hover {
+    background-color: #333; /* Darker gray background on hover */
+}
+
+/* Styling for debug text */
+#debugText {
+    margin-top: 20px; /* Top margin */
+    font-size: 1.2em; /* Larger font size */
+}
+#timerDisplay
+{
+    font-size: 1.25em; /* Font size */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.164); /* Subtle Text shadow for the title */
+    padding-top: 10px;
+}
+/* Styling for the connect button */
+#connectButton {
+    margin-top: 20px; /* Top margin */
+    padding: 10px 20px; /* Padding inside the button */
+    font-size: 1em; /* Font size */
+    background: linear-gradient(45deg, #5cb55f, #409a43); /* Gradient background */
+    color: #fff; /* White text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+/* Change background color on hover */
+#connectButton:hover {
+    background-color: #45a049; /* Different green background on hover */
+    
+}
+
+/* Styling for status text */
+#statusText {
+    margin-top: 10px; /* Top margin */
+    font-size: 1.2em; /* Larger font size */
+    color: #F44336; /* Red color for inactive status */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.185); /* Text shadow */
+}
+
+/* Styling for keys on the virtual keyboard */
+.key {
+    background: linear-gradient(45deg, #1f2125, #1a1a1a); /* Gradient background */
+    border: 1px solid #8d8d8d; /* Border color */
+    color: #fff; /* White text color */
+    width: 100px; /* Fixed width */
+    height: 100px; /* Fixed height */
+    border-radius: 10px; /* Rounded corners */
+    margin: 15px; /* Margin around each key */
+    text-align: center; /* Center text */
+}
+
+/* Styling for active keys */
+.activeKey {
+    background: linear-gradient(45deg, #ff3232, #ff0000); /* Gradient background */
+    border: 1px solid #8d8d8d; /* Border color */
+    color: #fff; /* White text color */
+}
+
+/* Center the top row of the keyboard */
+.top-row {
+    width: 40px; /* Fixed width */
+    margin: 0 auto; /* Center horizontally */
+}
+
+/* Display bottom row keys in a line */
+.bottom-row {
+    display: inline-flex; /* Inline flexbox */
+}
+
+/* Initial display and alignment for keyboard and joystick */
+.keyboard,
+#joystick {
+    display: inline-block; /* Display elements inline */
+    vertical-align: top; /* Align elements to the top */
+    visibility: hidden; /* Initially hide the elements */
+}
+
+/* Show keyboard and joystick when manual menu is active */
+#manualMenu.active .keyboard,
+#manualMenu.active #joystick {
+    visibility: visible; /* Show elements */
+}
+
+/* General paragraph styling */
+p {
+    padding: 10px; /* Padding inside paragraphs */
+}
+
+/* Container styling with animation */
+.container {
+    width: 100%; /* Full width */
+    background-color: #ff4500; /* Initial background color */
+    animation: change-color-anim 20s linear infinite; /* Apply background color animation */
+}
+
+
+
